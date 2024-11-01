@@ -9,6 +9,8 @@ and allow it to be easily used by other layers downstream, such as DWH or BI too
 
 ## Dimensions and Fact tables
 
+![ERD](https://github.com/diegotmd/bitso-homework/blob/main/Bitso-ERD.png)
+
 - dim_user - Granularity of this dimension is one row for each user, with user_id as primary key and last_login as
            a SCD type 1 column. In a real-world scenario we could enrich this dimension with additional user data,
            so fields could be used for filtering, aggregation and slicing.
@@ -33,6 +35,7 @@ and allow it to be easily used by other layers downstream, such as DWH or BI too
 - daily_stats (fact) - A snapshot table with aggregated data to facilitate answering some of the questions in the problem statement,
                      also for performance reasons, in case the volume of data grows a lot. It's a snapshot type fact table and its
                      granularity is date, currency, level and jurisdiction with a few metrics aggregated at this level.
+
 
 ## Other dimensions that could be implemented to enrich the data model:
 - Jurisdiction
