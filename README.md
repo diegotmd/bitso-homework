@@ -42,6 +42,9 @@ and allow it to be easily used by other layers downstream, such as DWH or BI too
 - Currency
 - Date
 
+## Queries
+You can find queries for some of the questions listed in the problem description [here](https://github.com/diegotmd/bitso-homework/blob/main/queries/queries.sql)
+
 ## Benefits of this modelling approach
 - Make some of the queries simpler
 - Improve performance, since some fact tables have pre-aggregated and pre-transformed data
