@@ -58,6 +58,9 @@ You can find queries for some of the questions listed in the problem description
 - Even if it's not very normalized, there is still room for it to  be flattened and have
   higher simplicity and redudancy, making it even easier to users to write their queries.
 
+## Output files (DWH)
+All the output files are in the curated data lake layer, you can download the zip file [here](https://github.com/diegotmd/bitso-homework/blob/main/data-lake/curated/curated.zip)
+
 # Explaining Data Lake and Pipelines
 The implementation of the pipeline simulates a daily batch processing approach. To make this possible, we had to do some simulation of an environment with daily increments.
 
