@@ -64,7 +64,7 @@ def generate_dim_user(date):
     merged_df = pd.merge(user_df, event_df, on='user_id', how='left')
 
     # Filter for login events
-    login_events = merged_df[merged_df['event_name'] == 'login']
+    login_events = merged_df[(merged_df['event_name'] == 'login') | (merged_df['event_name'].isnull())]
 
     # Get the latest login for each user
     result_df = login_events.groupby('user_id', as_index=False)['event_timestamp'].max()
@@ -533,3 +533,6 @@ def load(date):
     load_fact_user_daily_snapshot(date)
     load_user_level_fact(date)
     load_fact_daily_stats(date)
+
+
+
