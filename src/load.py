@@ -75,22 +75,13 @@ def generate_dim_user(date):
     return result_df
 
 def merge_dim_user(source_df, destination_df):
-
-    # Step 1: Merge the dataframes on 'user_id' with an outer join to capture all users
+    
     merged_df = destination_df.merge(source_df, on='user_id', how='outer', suffixes=('_dest', '_src'))
-    
-    # Step 2: Create the new DataFrame with updated 'last_login' values
-    merged_df['last_login'] = merged_df.apply(
-        lambda row: max(row['last_login_dest'], row['last_login_src']) 
-                    if pd.notna(row['last_login_src']) else row['last_login_dest'],
-        axis=1
-    )
-    
-    # Step 3: Select the columns to keep in the final DataFrame
+    merged_df['last_login'] = merged_df[['last_login_dest', 'last_login_src']].max(axis=1)
     result_df = merged_df[['user_id', 'last_login']]
     
-    # Step 4: Drop any duplicate rows if necessary
-    #result_df.drop_duplicates(subset=['user_id'], inplace=True)
+    # Drop any duplicate rows if necessary
+    result_df.drop_duplicates(subset=['user_id'], inplace=True)
     
     return result_df
 
@@ -100,6 +91,9 @@ def load_dim_user(date):
     
     new_df = generate_dim_user(date)
     destination_df_path = 'data-lake/curated/' + util.dim_user_table_name() + '.csv'
+
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(destination_df_path), exist_ok=True)
 
     if os.path.isfile(destination_df_path): 
         destination_df = pd.read_csv(destination_df_path)

@@ -75,18 +75,29 @@ The implementation of the pipeline simulates a daily batch processing approach. 
 - Curated - This layer contains data in the final model (closer to a traditional star schema dimensional model). Even though we are using CSV files in this case, we could easily do this on a different way, either using better file formats for this purpose (such as parquet) or load a traditional Datawarehouse like BigQuery or RedShift. The final step of the pipeline loads this layer with all dimensions and fact tables. 
 
 # List of future improvements
-- Create unit tests for each step of the pipeline, with priority to the transformation and merge functions, providing fixed inputs and checking if the output is the expected.
+- Increase test coverage, since the solution currently only has tests for the merging between fresh data and DWH (curated) facts and dimensions.
 - Replace pandas with a more performant framework, such as Spark or Datawarehouse solutions SQL (BigQuery / RedShift).
 - Running as daily batches is not performant for the initial load, so we could fork the code and develop a bulk load for the first run, and only after that the daily pipelines would take place.
 - Use an orchestration tool as Airflow to increase control of steps, monitoring, reprocessing, logging, backfilling and others.
 
+# Running tests
+
+## Pre requisites 
+You may need to install unittest if not installed yet.
+
+`pip install unittest`
+
+## Running
+Run src/tests.py with python3:
+
+`python3 src/tests.py`
 
 # Running the pipelines
 
 ## Pre requisites 
 All you need to have installed is Python 3 and pandas. If you have Python 3 installed, it usually comes with pip, so to install pandas just run this in a shell:
 
-pip install pandas
+`pip install pandas`
 
 ## Running
 The implementation of the pipeline simulates a daily batch processing approach. To make this possible, we had to do some simulation of an environment with daily increments.
@@ -96,3 +107,4 @@ We are simulating daily batches, and for this exercise we fixed the starting dat
 The main function that coordinates pipeline execution is in `etl.py`, so to run the code:
 - Extract  the content of data-lake/landing.zip inside data-lake/ folder. It will create the required structure in landind layer with source files.
 - Run this from a terminal inside root directory: `python3 src/etl.py`
+
