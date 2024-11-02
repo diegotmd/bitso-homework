@@ -4,8 +4,8 @@
 The data modelling technique adopted for this exercise was something closer to a traditional star schema,
 with some small simplifications to make the implementation easier and the model simpler (with less tables).
 
-The reason I've choosen it is to avoid excessive normalization of data, have some of the answers to main questions pre-processed
-and allow it to be easily used by other layers downstream, such as DWH or BI tools.
+The reason I've choosen it was to avoid excessive normalization of data, have some of the answers to main questions 
+pre-processed and allow the model to be easily used by other layers downstream, such as DWH or BI tools.
 
 ## Dimensions and Fact tables
 
